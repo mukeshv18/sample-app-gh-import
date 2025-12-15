@@ -2,10 +2,6 @@
 pipeline {
   agent any
 
-  tools {
-    jdk 'JDK11'        // Must exist in Manage Jenkins → Global Tool Configuration
-    maven 'Maven3'     // Must exist in Manage Jenkins → Global Tool Configuration
-  }
 
   environment {
     MAVEN_OPTS = '-Xmx1024m'
