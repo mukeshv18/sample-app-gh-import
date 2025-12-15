@@ -15,8 +15,9 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
+        // Uses SCM configured on the job; for Multibranch this is automatic
         checkout scm
-        // Or:
+        // Or explicitly:
         // git branch: 'main', url: 'https://github.com/your-org/your-repo.git', credentialsId: 'your-creds-id'
       }
     }
@@ -46,11 +47,12 @@ pipeline {
       echo '✅ Build succeeded!'
       archiveArtifacts artifacts: '**/target/*.jar', onlyIfSuccessful: true
     }
-       failure {
+    failure {
       echo '❌ Build failed.'
     }
     always {
       cleanWs()
     }
   }
+}
 
