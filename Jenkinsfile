@@ -1,7 +1,5 @@
-
 pipeline {
   agent any
-
 
   environment {
     MAVEN_OPTS = '-Xmx1024m'
@@ -47,8 +45,10 @@ pipeline {
       echo '❌ Build failed.'
     }
     always {
-      cleanWs()
+      // Wrap cleanWs in a `node` block to resolve MissingContextVariableException
+      node {
+        cleanWs()
+      }
     }
   }
 }
-
